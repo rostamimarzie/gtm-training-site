@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitBox - GTM Practice Site</title>
+  <!-- Google Tag Manager (Replace GTM-XXXX with your ID) -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXX');
+  </script>
+  <!-- End Google Tag Manager -->
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <header>
+    <h1>Welcome to FitBox</h1>
+    <nav>
+      <a href="#product">Product</a>
+      <a href="#form">Contact</a>
+    </nav>
+  </header>
+
+  <section id="product">
+    <h2>Protein Power Pack</h2>
+    <p>High-protein supplement bundle for fitness lovers.</p>
+    <button id="addToCart">Add to Cart</button>
+  </section>
+
+  <section id="form">
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 FitBox</p>
+  </footer>
+
+  <script>
+    // Simulate dataLayer pushes
+    document.getElementById("addToCart").addEventListener("click", function () {
+      window.dataLayer = window.dataLayer || [];
+      dataLayer.push({
+        event: "add_to_cart",
+        product_name: "Protein Power Pack",
+        price: 49.99,
+      });
+    });
+
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      dataLayer.push({
+        event: "form_submission",
+        form_name: "contactForm",
+      });
+      alert("Message sent!");
+    });
+  </script>
+</body>
+</html>
