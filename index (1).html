@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitBox Store - GTM Practice Site</title>
+  <!-- Google Tag Manager (Replace GTM-XXXX with your ID) -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXX');
+  </script>
+  <!-- End Google Tag Manager -->
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    header, footer { margin-bottom: 2rem; }
+    nav a { margin-right: 1rem; }
+    section { margin-bottom: 3rem; }
+    .product { border: 1px solid #ccc; padding: 1rem; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <header>
+    <h1>FitBox Online Store</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#cart">Cart</a>
+      <a href="#checkout">Checkout</a>
+    </nav>
+  </header>
+
+  <section id="home">
+    <h2>Welcome to FitBox</h2>
+    <p>Your ultimate destination for curated fitness supplements and bundles.</p>
+  </section>
+
+  <section id="products">
+    <h2>Products</h2>
+    <div class="product">
+      <h3>Protein Power Pack</h3>
+      <p>$49.99</p>
+      <button onclick="addToCart('Protein Power Pack', 49.99)">Add to Cart</button>
+    </div>
+    <div class="product">
+      <h3>Vegan Muscle Mix</h3>
+      <p>$59.99</p>
+      <button onclick="addToCart('Vegan Muscle Mix', 59.99)">Add to Cart</button>
+    </div>
+  </section>
+
+  <section id="cart">
+    <h2>Cart</h2>
+    <ul id="cartItems"></ul>
+    <button onclick="removeFromCart()">Remove All</button>
+  </section>
+
+  <section id="checkout">
+    <h2>Checkout</h2>
+    <form id="checkoutForm">
+      <input type="text" placeholder="Name" required />
+      <input type="email" placeholder="Email" required />
+      <input type="text" placeholder="Address" required />
+      <button type="submit">Pay Now</button>
+    </form>
+  </section>
+
+  <section id="thankyou" style="display:none">
+    <h2>Thank You for Your Purchase!</h2>
+    <p>Your order has been received.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 FitBox</p>
+  </footer>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    let cart = [];
+
+    function addToCart(product, price) {
+      cart.push({ product, price });
+      const cartList = document.getElementById("cartItems");
+      const item = document.createElement("li");
+      item.textContent = `${product} - $${price}`;
+      cartList.appendChild(item);
+
+      dataLayer.push({
+        event: "add_to_cart",
+        product_name: product,
+        price: price
+      });
+    }
+
+    function removeFromCart() {
+      cart = [];
+      document.getElementById("cartItems").innerHTML = "";
+      dataLayer.push({
+        event: "remove_from_cart"
+      });
+    }
+
+    document.getElementById("checkoutForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      dataLayer.push({
+        event: "purchase",
+        cart: cart
+      });
+      document.getElementById("checkout").style.display = "none";
+      document.getElementById("thankyou").style.display = "block";
+    });
+  </script>
+</body>
+</html>
